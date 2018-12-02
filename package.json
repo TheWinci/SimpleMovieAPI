@@ -1,0 +1,25 @@
+{
+  "name": "simplemovieapi",
+  "version": "1.0.0",
+  "description": "simple movie api",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheWinci/SimpleMovieAPI.git"
+  },
+  "author": "winci",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheWinci/SimpleMovieAPI/issues"
+  },
+  "homepage": "https://github.com/TheWinci/SimpleMovieAPI#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.14",
+    "request": "^2.88.0"
+  }
+}
