@@ -7,9 +7,11 @@ simpe api to add and browse movies and comments
 #### GET
 * if request has "id" it will return movie with that id if found 
 EXAMPLE BODY:
+```json
 {
 	"id": "5c043c589c58ee35e073e0d9"
 }
+```
 EXAMPEL RESPONSE:
 ```json
 {
@@ -24,6 +26,7 @@ EXAMPEL RESPONSE:
     "__v": 0
 }
 ```
+
 * if request does not have "id" it will return list of all movies in db
 ```json
 [
@@ -66,12 +69,14 @@ EXAMPEL RESPONSE:
 #### POST
 requires "title" in request otherwise will return error message
 will return shortened object returned by http://www.omdbapi.com/ and will add it to the db
+
 * EXAMPEL REQUEST
 ```json
 {
 	"title": "Fantastic Beasts"
 }
 ```
+
 * EXAMPLE RESPONSE
 ```json
 {
