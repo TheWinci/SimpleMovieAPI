@@ -5,7 +5,7 @@ simpe api to add and browse movies and comments
 
 ### /movies
 #### GET
-* if request has "id" it will return movie with that id if found 
+* if request has "id" it will return movie with that id if found
 EXAMPLE BODY:
 ```json
 {
