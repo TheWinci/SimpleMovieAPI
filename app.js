@@ -9,3 +9,5 @@ app.use('/api', api);
 app.listen(8080, function() {
     console.log("server started at http://localhost:8080");
 });
+
+module.exports = app;
