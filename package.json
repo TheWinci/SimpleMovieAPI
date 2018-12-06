@@ -4,6 +4,7 @@
   "description": "simple movie api",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "mocha --timeout 10000"
   },
   "repository": {
