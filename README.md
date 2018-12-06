@@ -107,7 +107,9 @@ requires "movie_id" and "text" to create a comment
 RESPONSE will contain the created comment if specified movie id will be found in the db
 
 ### GET
+
 *NO PARAMETERS
 if no parameters will be specified it will fetch all comments present in db
+
 *MOVIE ID SPECIFIED
 if movie_id has been specified it will return an array of comments added to sleceted movie
