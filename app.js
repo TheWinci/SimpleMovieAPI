@@ -6,8 +6,8 @@ const app = express();
 app.use( bodyParser.json() );
 app.use('/api', api);
 
-app.listen(8080, function() {
-    console.log("server started at http://localhost:8080");
+app.listen(process.env.PORT || 8080, function() {
+    console.log(`server listening at ${process.env.PORT}`);
 });
 
 module.exports = app;
