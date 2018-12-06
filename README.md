@@ -91,3 +91,23 @@ will return shortened object returned by http://www.omdbapi.com/ and will add it
     "__v": 0
 }
 ```
+
+## comments
+### POST
+requires "movie_id" and "text" to create a comment
+
+*EXAMPLE REQUEST
+```json
+{
+    "movie_id": "5c04410aa5aba23b94e17bba",
+    "text": "comment text"
+}
+```
+
+RESPONSE will contain the created comment if specified movie id will be found in the db
+
+### GET
+*NO PARAMETERS
+if no parameters will be specified it will fetch all comments present in db
+*MOVIE ID SPECIFIED
+if movie_id has been specified it will return an array of comments added to sleceted movie
