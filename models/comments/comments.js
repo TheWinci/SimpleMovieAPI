@@ -1,10 +1,5 @@
 const mongoose = require("mongoose");
 
-const DB_USER = "pawel";
-const DB_PASSWORD = "netguru_movies1";
-
-mongoose.connect(`mongodb://${DB_USER}:${DB_PASSWORD}@ds123584.mlab.com:23584/simple_movie_api`, { useNewUrlParser: true });
-
 var schema = new mongoose.Schema({
     movie_id: String,
     text: String
