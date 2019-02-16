@@ -13,48 +13,34 @@ var schema = new mongoose.Schema({
 var Movie = mongoose.model("Movie", schema);
 
 function addMovie(movieData, cb) {
-
-    var user = new Movie(movieData);
-
-    user.save(function(err, movie) {
-
-        if(err) {
+    var movie = new Movie(movieData);
+    movie.save(function (err, movie) {
+        if (err) {
             cb(err);
         } else {
             cb(null, movie);
         }
-
     });
-
 }
 
 function getMovie(id, cb) {
-
-    Movie.findById(id).exec(function(err, movie) {
-
-        if(err) {
+    Movie.findById(id).exec(function (err, movie) {
+        if (err) {
             cb(err);
         } else {
             cb(null, movie);
         }
-
     });
-
 }
 
-
 function listMovies(cb) {
-
-    Movie.find({}).exec(function(err, movies) {
-
-        if(err) {
+    Movie.find({}).exec(function (err, movies) {
+        if (err) {
             cb(err);
         } else {
             cb(null, movies);
         }
-
     });
-
 }
 
 module.exports = {
