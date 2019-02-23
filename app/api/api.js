@@ -3,6 +3,8 @@ const request = require('request');
 const movies = require('../models/movies');
 const comments = require('../models/comments');
 
+const movieService = require('../services/movie_service');
+
 const router = express.Router();
 
 const _API_KEY = 'fb23be02';
@@ -41,10 +43,10 @@ router.post("/movies", function (req, res) {
                 res.json(data);
             }
         });
-    })
+    });
 });
 
-router.get("/movies", function (req, res) {
+router.get("/movies", async (req, res) => {
     if (req.body.id != null) {
         movies.get(req.body.id, function (err, data) {
             if (err) {
@@ -58,15 +60,13 @@ router.get("/movies", function (req, res) {
         });
         return;
     }
-    movies.list(function (err, data) {
-        if (err) {
-            res.status(404);
-            res.json({
-                error: "Movies not found"
-            });
-        } else {
-            res.json(data);
-        }
+    await movies.list().then((result) => {
+        res.json(result);
+    }).catch((error) => {
+        res.status(404);
+        res.json({
+            error: "Movies not found"
+        });
     });
 });
 

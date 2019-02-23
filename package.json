@@ -4,7 +4,7 @@
   "description": "simple movie api",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app/app.js",
     "test": "mocha --timeout 10000"
   },
   "repository": {
@@ -25,6 +25,7 @@
     "mocha": "^5.2.0",
     "mongoose": "^5.3.14",
     "nodemon": "^1.18.10",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
   }
 }
