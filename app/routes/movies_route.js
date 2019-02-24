@@ -1,22 +1,21 @@
 const app = require('express').Router();
 const service = require('../services/movie_service');
+const helper = require('../helpers/movie_helper');
 
 app.get('/', async (req, res) => {
-    if (await service.hasId(req)) {
+    if (await helper.hasId(req)) {
         await service.get(req.body.id).then((data) => {
             res.json(data);
-        }).catch((err) => {
-            res.status(404).json({
-                message: 'no movie with specified id has been found',
-                error: err
+        }).catch(async (err) => {
+            res.status(400).json({
+                message: err.message
             });
         });
     }
     else{
         await service.list().then((data) => {
             res.json(data);
-        }).catch((err) => {
-            console.log(err);
+        }).catch((err) => { 
             res.status(404).json({
                 message: 'no movies',
                 error: err
@@ -26,7 +25,7 @@ app.get('/', async (req, res) => {
 });
 
 app.post('/', async (req, res) => {
-    if (!await service.isPostValid(req)) {
+    if (!await helper.hasTitle(req)) {
         res.status(400).json({
             message: 'no title specified'
         });
@@ -34,12 +33,10 @@ app.post('/', async (req, res) => {
     }
     
     await service.add(req.body.title).then((data) => {
-        let movieData = data;
-        
+        res.json(data);
     }).catch((error) => {
         res.status(404).json({
-            message: "no movie found with specified title",
-            error: error
+            message: error.message
         });
     });
 });

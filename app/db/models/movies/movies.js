@@ -13,8 +13,7 @@ var schema = new mongoose.Schema({
 var Movie = mongoose.model("Movie", schema);
 
 const addMovie = async (movieData) => {
-    var movie = new Movie(movieData);
-    return await movie.save();
+    return await (new Movie(movieData)).save();
 }
 
 const getMovie = async (id) => {
@@ -25,8 +24,13 @@ const listMovies = async () => {
     return await Movie.find({});
 }
 
+const isDuplicate = async (imdbIDToCheck) => {
+    return (await Movie.countDocuments({ imdbID: imdbIDToCheck})) ? true : false;
+}
+
 module.exports = {
     add: addMovie,
     get: getMovie,
-    list: listMovies
+    list: listMovies,
+    isDuplicate: isDuplicate
 };
