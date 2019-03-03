@@ -1,24 +1,27 @@
 const app = require('express').Router();
-const service = require('../services/movie_service');
+const movies = require('../db/models/movies');
 const helper = require('../helpers/movie_helper');
+const request = require('request-promise');
+
+const _API_KEY = 'fb23be02';
+const _BASE_GET_URL = `http://www.omdbapi.com/?apikey=${_API_KEY}&`;
 
 app.get('/', async (req, res) => {
     if (await helper.hasId(req)) {
-        await service.get(req.body.id).then((data) => {
-            res.json(data);
-        }).catch(async (err) => {
-            res.status(400).json({
-                message: err.message
+        await movies.get(req.body.id).then((result) => {
+            res.json(result);
+        }).catch((error) => {
+            res.json({
+                error: error.message
             });
         });
     }
     else{
-        await service.list().then((data) => {
-            res.json(data);
-        }).catch((err) => { 
-            res.status(404).json({
-                message: 'no movies',
-                error: err
+        await movies.list().then((result) => {
+            res.json(result);
+        }).catch((error) => {
+            res.status(418).json({
+                error: error.message
             });
         });
     }
@@ -27,16 +30,36 @@ app.get('/', async (req, res) => {
 app.post('/', async (req, res) => {
     if (!await helper.hasTitle(req)) {
         res.status(400).json({
-            message: 'no title specified'
+            error: 'no title specified'
         });
         return;
     }
     
-    await service.add(req.body.title).then((data) => {
-        res.json(data);
+    var options = {
+        uri: `${_BASE_GET_URL}t=${req.body.title}`,
+        headers: { 'User-Agent': 'Request-Promise' },
+        json: true
+    };
+    let data = await request(options).catch((error) => {
+        res.status(400).json({
+            error: error.message
+        });
+        BroadcastChannel;
+    });
+
+    await movies.isDuplicate(data.imdbID).then(async (isFalse) => {
+
+        await movies.add(data).then((result) => {
+            res.json(result);
+        }).catch((error) => {
+            res.status(400).json({
+                error: error.message
+            });
+        });
+
     }).catch((error) => {
-        res.status(404).json({
-            message: error.message
+        res.status(400).json({
+            error: error.message
         });
     });
 });

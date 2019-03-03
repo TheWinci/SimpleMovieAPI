@@ -8,7 +8,11 @@ var schema = new mongoose.Schema({
 var Comment = mongoose.model("Comment", schema);
 
 const getComments = async (movie_id) => {
-    return await Comment.where('movie_id').equals(movie_id);
+    try {
+        return await Comment.where('movie_id').equals(movie_id);
+    } catch (error) {
+        throw error;        
+    }
 }
 
 const addComment = async (commentData) => {
